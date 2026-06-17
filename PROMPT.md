@@ -217,6 +217,9 @@ For each H2:
 - Checklist (for preparation)
 - FAQ accordion (5+ questions)
 - Document template (if topic involves creating a document)
+- Judicial practice examples (for conflict legal topics, 2-3 anonymous cases)
+- Risk table (for complex disputes with multiple risks)
+- Italic law citations (`<em>` for law references in legal niche)
 
 ## 11. Sources
 | Fact | Source | Where used | Status | Risk |
@@ -259,7 +262,7 @@ Fact-check date: filled in Stage 3.
 ### Brief Status
 ```
 Status: ready_for_copywriter | ready_for_design_and_build | requires_expert_review
-Score: XX/40
+Score: XX/42
 Date: YYYY-MM-DD
 Fact-check: passed | partial | failed
 ```
@@ -286,7 +289,7 @@ If WebSearch finds discrepancy with brief — **update the brief** and note the 
 
 ### 3.2. Scoring Rubric
 
-Score the brief on 20 criteria (0-2 points each, max 40):
+Score the brief on 21 criteria (0-2 points each, max 42):
 
 | # | Criterion | What to check |
 |---|-----------|---------------|
@@ -306,23 +309,24 @@ Score the brief on 20 criteria (0-2 points each, max 40):
 | 14 | Editorial compliance | Layer A/B rules followed |
 | 15 | No fabrication | No invented URLs/facts |
 | 16 | YMYL safeguard | Disclaimer, date, sources (if YMYL) |
-| 17 | Document template | Template included if topic requires it |
-| 18 | Excluded boundary | Excluded queries NOT covered |
-| 19 | Cannibalization | Checked in passport |
-| 20 | Evidence mode | Stated and matches reality |
-| 21 | Checklist ready | Section 15 filled, all items ✓ |
+| 17 | Legal components | Judicial practice, risk table, italic citations (if legal) |
+| 18 | Document template | Template included if topic requires it |
+| 19 | Excluded boundary | Excluded queries NOT covered |
+| 20 | Cannibalization | Checked in passport |
+| 21 | Evidence mode | Stated and matches reality |
+| 22 | Checklist ready | Section 15 filled, all items ✓ |
 
 **Thresholds:**
-- 38–40: production-ready
-- 32–37: usable after revision (specify what to improve)
-- < 32: redo Stage 2 (return and strengthen weak sections)
+- 40–42: production-ready
+- 34–39: usable after revision (specify what to improve)
+- < 34: redo Stage 2 (return and strengthen weak sections)
 
 ### GATE Block
 
 After Stage 3, output:
 ```
 ═══ STAGE 3 COMPLETE ═══
-Score: XX/40
+Score: XX/42
 Fact-check: passed | partial (N facts unverified)
 Transition to Stage 4: allowed / denied (reason)
 ════════════════════════
