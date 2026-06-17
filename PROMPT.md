@@ -216,6 +216,7 @@ For each H2:
 - Timeline (for stages/deadlines)
 - Checklist (for preparation)
 - FAQ accordion (5+ questions)
+- Document template (if topic involves creating a document)
 
 ## 11. Sources
 | Fact | Source | Where used | Status | Risk |
@@ -248,6 +249,7 @@ Fact-check date: filled in Stage 3.
 - [ ] UX blocks specified (section 10)
 - [ ] YMYL disclaimer present (if applicable)
 - [ ] Sources checked (section 11)
+- [ ] Document template included (if topic involves creating a document)
 - [ ] Schema matches visible content
 - [ ] Excluded queries NOT covered
 - [ ] Facts verified via WebSearch
@@ -304,10 +306,11 @@ Score the brief on 20 criteria (0-2 points each, max 40):
 | 14 | Editorial compliance | Layer A/B rules followed |
 | 15 | No fabrication | No invented URLs/facts |
 | 16 | YMYL safeguard | Disclaimer, date, sources (if YMYL) |
-| 17 | Excluded boundary | Excluded queries NOT covered |
-| 18 | Cannibalization | Checked in passport |
-| 19 | Evidence mode | Stated and matches reality |
-| 20 | Checklist ready | Section 15 filled, all items ✓ |
+| 17 | Document template | Template included if topic requires it |
+| 18 | Excluded boundary | Excluded queries NOT covered |
+| 19 | Cannibalization | Checked in passport |
+| 20 | Evidence mode | Stated and matches reality |
+| 21 | Checklist ready | Section 15 filled, all items ✓ |
 
 **Thresholds:**
 - 38–40: production-ready
@@ -436,6 +439,24 @@ CSS: grid 2 columns, surface bg, hover → accent border + shadow. Icons: amber/
 
 **Law Base Block** (for legal niche): surface bg, border, linked law articles list.
 
+**Document Template Block** (if topic involves document creation):
+```html
+<div class="doc-template">
+  <div class="doc-header">
+    <h3>Образец: <document name></h3>
+    <span class="doc-badge">Шаблон</span>
+  </div>
+  <pre class="doc-body"><code>В <span class="placeholder">[court/authority name]</span>
+From: <span class="placeholder">[Your full name]</span>
+...
+</code></pre>
+  <div class="doc-footer">
+    <span class="doc-note">⚠️ Template is for reference only. Consult a specialist.</span>
+  </div>
+</div>
+```
+CSS: surface bg, border, monospace pre, `.placeholder` with amber highlight. Disclaimer in footer mandatory.
+
 ### Schema.org JSON-LD
 
 Always include `Article`. Add by archetype:
@@ -465,6 +486,7 @@ Don't animate: paragraph text, tables, links, breadcrumbs.
 - Disclaimer: "Информация носит общий характер и не является <legal/medical/financial> консультацией"
 - Date: `<time datetime="YYYY-MM-DD">Обновлено: date</time>`
 - Source links for all key claims
+- **Document template** (if the topic involves creating a document: lawsuit, application, complaint, contract)
 
 ---
 

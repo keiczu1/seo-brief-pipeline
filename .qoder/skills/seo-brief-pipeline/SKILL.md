@@ -234,7 +234,7 @@ npm.cmd run analyze:query -- --id <queryId> --query "<query>" --locale ru-RU
 1. **Семантический HTML5**: `<article>`, `<nav>`, `<section>`, `<details>`, `<time>`
 2. **Schema.org JSON-LD** в `<head>`: `Article` + типовой schema (HowTo, FAQPage, etc.)
 3. **Responsive CSS**: max-width 780px, media query ≤600px
-4. **Структура**: breadcrumbs → sticky nav → meta → h1 → summary card → sections → FAQ → disclaimer
+5. **Структура**: breadcrumbs → sidebar TOC → meta → h1 → summary card → sections → FAQ → disclaimer
 5. **Ссылки на источники**: `rel="noopener"`, `target="_blank"`
 6. **Без выдуманных URL**: если не уверен в точном URL — используй base-URL документа
 
@@ -243,6 +243,7 @@ npm.cmd run analyze:query -- --id <queryId> --query "<query>" --locale ru-RU
 - Дисклеймер: «Информация носит общий характер, не является юридической/медицинской консультацией»
 - Дата актуальности для числовых данных
 - Ссылки на официальные источники
+- Образец документа (если тема предполагает составление документа)
 
 ---
 

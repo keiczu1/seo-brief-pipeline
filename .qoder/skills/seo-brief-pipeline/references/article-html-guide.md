@@ -275,6 +275,60 @@ CSS: surface bg, border, radius 10px. Список без маркеров, ка
 
 3–5 пунктов. Формат: глагол + суть. В зелёном callout-блоке.
 
+### 13. Блок «Образец документа» (если тема предполагает составление документа)
+
+**Когда нужен:** статья о подаче иска, заявления, жалобы, претензии, составлении договора — любой теме, где пользователь должен составить документ.
+
+```html
+<div class="doc-template">
+  <div class="doc-header">
+    <h3>Образец: <название документа></h3>
+    <span class="doc-badge">Шаблон</span>
+  </div>
+  <pre class="doc-body"><code>В <span class="placeholder">[наименование суда/органа]</span>
+От: <span class="placeholder">[Ваше Ф.И.О.]</span>
+Адрес: <span class="placeholder">[Ваш адрес]</span>
+Телефон: <span class="placeholder">[Ваш телефон]</span>
+
+ИСКОВОЕ ЗАЯВЛЕНИЕ
+о <span class="placeholder">[предмет иска]</span>
+
+<span class="placeholder">[Основная часть: описание обстоятельств, обоснование требований]</span>
+
+На основании изложенного, руководствуясь
+<span class="placeholder">[статьи закона]</span>,
+
+ПРОШУ:
+1. <span class="placeholder">[Требование 1]</span>
+2. <span class="placeholder">[Требование 2]</span>
+
+Приложение:
+1. <span class="placeholder">[Список документов]</span>
+
+Дата: <span class="placeholder">[ДД.ММ.ГГГГ]</span>
+Подпись: ____________</code></pre>
+  <div class="doc-footer">
+    <span class="doc-note">⚠️ Образец носит информационный характер. Рекомендуем проконсультироваться со специалистом.</span>
+  </div>
+</div>
+```
+
+CSS:
+```css
+.doc-template { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; margin: 20px 0; overflow: hidden; }
+.doc-header { display: flex; align-items: center; gap: 10px; padding: 14px 18px; border-bottom: 1px solid var(--border); }
+.doc-header h3 { margin: 0; font-size: 16px; }
+.doc-badge { font-size: 11px; font-weight: 700; text-transform: uppercase; background: var(--accent); color: #fff; padding: 2px 8px; border-radius: 4px; }
+.doc-body { margin: 0; padding: 18px; background: #fff; font-size: 14px; line-height: 1.8; overflow-x: auto; white-space: pre-wrap; font-family: "Courier New", monospace; }
+.doc-body .placeholder { background: #fef3c7; padding: 1px 4px; border-radius: 3px; font-style: italic; }
+.doc-footer { padding: 10px 18px; border-top: 1px solid var(--border); font-size: 13px; color: var(--muted); }
+```
+
+**Правила:**
+- Все поля для заполнения — в `<span class="placeholder">[Описание]</span>`
+- Дисклеймер в футере обязателен
+- Для YMYL: добавить «Рекомендуем проконсультироваться с юристом/специалистом»
+
 ---
 
 ## Анимации (опционально, GSAP + ScrollTrigger)
@@ -420,6 +474,7 @@ document.querySelectorAll('.animate-in').forEach(el => observer.observe(el));
 | 10. Sticky nav | `.toc` |
 | 10. Сценарные развилки | `.choice-cards` |
 | 12. Резюме | `.callout-summary` с `<ol>` |
+| 12. Образец документа | `.doc-template` (если тема предполагает) |
 | 13. Schema | JSON-LD в `<head>` |
 | 14. Дисклеймер | `.disclaimer` |
 
@@ -438,6 +493,7 @@ document.querySelectorAll('.animate-in').forEach(el => observer.observe(el));
 - [ ] FAQ accordion с полными ответами
 - [ ] Ссылки на источники: verified URL или base-URL
 - [ ] YMYL-дисклеймер (если применимо)
+- [ ] Образец документа (если тема предполагает составление)
 - [ ] lang="ru" в <html>
 - [ ] Нет фабрикованных URL
 ```
