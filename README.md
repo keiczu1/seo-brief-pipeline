@@ -50,29 +50,47 @@ your-project/
 ├── .qoder/
 │   └── skills/
 │       └── seo-brief-pipeline/
-│           ├── SKILL.md                          # Main skill orchestration
+│           ├── SKILL.md                          # Main skill orchestration (Qoder)
 │           └── references/
 │               ├── article-html-guide.md          # HTML generation rules
 │               ├── brief-template.md              # 15-section brief template
 │               ├── editorial-rules-general.md     # Editorial rules (non-YMYL)
 │               ├── editorial-rules-legal.md       # Editorial rules (legal niche)
 │               └── stage2-instructions.md         # LLM synthesis instructions
+├── PROMPT.md                                      # Universal prompt (any LLM)
 ├── output/                                        # Generated briefs + HTML articles
 └── ...
 ```
 
 ## Usage
 
-In Qoder, invoke with slash command:
+### Universal (any LLM — ChatGPT, Gemini, Claude, etc.)
+
+The main file is **`PROMPT.md`** — a self-contained system prompt that merges all pipeline stages, templates, and editorial rules.
+
+**How to use:**
+1. Open `PROMPT.md` and copy its entire content
+2. Start a new conversation in any LLM (ChatGPT, Gemini, Claude, etc.)
+3. Paste the prompt as the first message / system instructions / custom instructions
+4. Then provide your query:
+   ```
+   Query: "госпошлина при разводе в 2026 году"
+   ```
+
+The LLM will execute all 4 stages and produce a brief + HTML article.
+
+**Or as Custom Instructions (ChatGPT):**
+- Settings → Personalization → Custom instructions → paste PROMPT.md into "How would you like ChatGPT to respond?"
+
+**Or as Gemini Gems / System Instructions:**
+- Create a new Gem → paste PROMPT.md as the instruction
+
+### Qoder (slash command)
+
+Copy `.qoder/skills/seo-brief-pipeline/` into your project. Then invoke:
 
 ```
 /seo-brief-pipeline "госпошлина при разводе в 2026 году"
-```
-
-Or just ask naturally:
-
-```
-Write an SEO article about "how to install Node.js on Windows"
 ```
 
 ### Optional Inputs
