@@ -1,0 +1,29 @@
+{
+  "name": "seo-brief-pipeline",
+  "version": "1.0.0",
+  "description": "Universal SEO page brief pipeline skill for Qoder. Takes any search query, runs rule-based analysis (Stage 1), LLM synthesis (Stage 2), fact-checking (Stage 3), and generates a production-ready HTML article (Stage 4).",
+  "keywords": [
+    "seo",
+    "brief",
+    "pipeline",
+    "qoder",
+    "skill",
+    "content-generation",
+    "html-article",
+    "fact-checking",
+    "ymyl",
+    "schema-org"
+  ],
+  "author": "",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "files": [
+    ".qoder/"
+  ],
+  "engines": {
+    "node": ">=18"
+  }
+}
