@@ -25,7 +25,7 @@ Stage 2: LLM Synthesis — 15-section brief
   │
   ▼
 Stage 3: Fact-Check + Score
-  → WebSearch verification, 20-criteria rubric (max 40)
+  → WebSearch verification, 22-criteria rubric (max 44)
   │
   ▼
 Stage 4: HTML Article Generation
@@ -56,7 +56,7 @@ If query is ambiguous, determine the **dominant intent**, pick archetype by domi
 
 ### YMYL Detection
 
-Query touches health, law, finance, safety? → Set `isYMYL: true`. This triggers mandatory disclaimers, fact-check rigor, and source linking.
+Query touches health, law, finance, safety? → Set YMYL risk level: `no` / `medium` / `high`. This triggers mandatory disclaimers, fact-check rigor, and source linking.
 
 ### Stage 1 Output
 
@@ -65,7 +65,7 @@ Record as `stage1_output` block:
 Query: «...»
 Archetype: <type>
 Dominant intent: informational / practical / commercial / mixed
-YMYL: yes/no (category)
+YMYL: no / medium / high (category)
 Evidence mode: knowledge_draft (if no SERP data available)
 ```
 
@@ -205,7 +205,7 @@ For each H2:
 - What to write: <specific instructions, not "talk about...">
 - Required facts: <from section 5>
 - Queries covered: core | supporting
-- Block format: text | table | numbered list | callout | timeline | checklist
+- Block format: text | table | list | callout | timeline | checklist | document-template | court-practice | risk-table
 - Don't write: <what to avoid>
 
 ## 10. UX & Visual Blocks
@@ -262,7 +262,7 @@ Fact-check date: filled in Stage 3.
 ### Brief Status
 ```
 Status: ready_for_copywriter | ready_for_design_and_build | requires_expert_review
-Score: XX/42
+Score: XX/44
 Date: YYYY-MM-DD
 Fact-check: passed | partial | failed
 ```
@@ -289,7 +289,7 @@ If WebSearch finds discrepancy with brief — **update the brief** and note the 
 
 ### 3.2. Scoring Rubric
 
-Score the brief on 21 criteria (0-2 points each, max 42):
+Score the brief on 22 criteria (0-2 points each, max 44):
 
 | # | Criterion | What to check |
 |---|-----------|---------------|
@@ -310,23 +310,23 @@ Score the brief on 21 criteria (0-2 points each, max 42):
 | 15 | No fabrication | No invented URLs/facts |
 | 16 | YMYL safeguard | Disclaimer, date, sources (if YMYL) |
 | 17 | Legal components | Judicial practice, risk table, italic citations (if legal) |
-| 18 | Document template | Template included if topic requires it |
-| 19 | Excluded boundary | Excluded queries NOT covered |
-| 20 | Cannibalization | Checked in passport |
-| 21 | Evidence mode | Stated and matches reality |
-| 22 | Checklist ready | Section 15 filled, all items ✓ |
+| 18 | Excluded boundary | Excluded queries NOT covered |
+| 19 | Cannibalization | Checked in passport |
+| 20 | Evidence mode | Stated and matches reality |
+| 21 | Checklist ready | Section 15 filled, all items ✓ |
+| 22 | FAQ non-duplication | FAQ supplements body content, doesn't repeat it |
 
 **Thresholds:**
-- 40–42: production-ready
-- 34–39: usable after revision (specify what to improve)
-- < 34: redo Stage 2 (return and strengthen weak sections)
+- 38–44: production-ready
+- 32–37: usable after revision (specify what to improve)
+- < 32: redo Stage 2 (return and strengthen weak sections)
 
 ### GATE Block
 
 After Stage 3, output:
 ```
 ═══ STAGE 3 COMPLETE ═══
-Score: XX/42
+Score: XX/44
 Fact-check: passed | partial (N facts unverified)
 Transition to Stage 4: allowed / denied (reason)
 ════════════════════════
@@ -448,7 +448,7 @@ CSS: grid 2 columns, surface bg, hover → accent border + shadow. Icons: amber/
 <div class="doc-template">
   <div class="doc-header">
     <h3>Образец: <document name></h3>
-    <span class="doc-badge">Шаблон</span>
+    <span class="doc-badge">Образец</span>
   </div>
   <pre class="doc-body"><code>В <span class="placeholder">[court/authority name]</span>
 From: <span class="placeholder">[Your full name]</span>
@@ -472,9 +472,9 @@ Schema must describe ONLY visible content.
 
 ### Links
 - Only verified URLs. If unsure — use base-URL of the document.
-- Legal base URLs: СК РФ, ГПК РФ, НК РФ on consultant.ru
+- **Legal niche:** links must point to **specific article** (URL with hash), not generic document page. Use `consultant.ru/document/cons_doc_LAW_XXXXX/<hash>/`. If hash is unavailable — use base-URL with annotation `[URL требует уточнения]`.
 - Attributes: `<a href="url" target="_blank" rel="noopener">text</a>`
-- **Never fabricate hash fragments** in URLs.
+- **Never fabricate hash fragments** in URLs. Hashes obtained from WebSearch or browser are acceptable.
 
 ### Scroll Animations (optional)
 ```css
@@ -502,8 +502,9 @@ Don't animate: paragraph text, tables, links, breadcrumbs.
 - **Address:** second person ("вы", "ваш")
 - **Sentences:** ≤20 words, active voice, no passive
 - **Legal terms:** explain at first mention
-- **Law references:** every key claim → link to specific article + plain-language explanation
+- **Law references:** every key claim → link to **specific article** (URL with hash, not generic document page) + plain-language explanation
 - **Law Base block** at end of article: all used norms with links
+- **FAQ:** questions from real user concerns; **does NOT duplicate article body** — supplements with nuances, practical tips, edge-cases
 - **Court practice:** required for conflict topics (2-3 anonymous examples)
 - **Risk table** for complex disputes: Risk → How to avoid
 - **Resume:** 3-5 points, verb + essence, mandatory

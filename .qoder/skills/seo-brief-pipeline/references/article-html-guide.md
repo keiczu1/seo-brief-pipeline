@@ -64,7 +64,7 @@
 ### Базовые стили
 
 ```css
-body { max-width: 780px; margin: 0 auto; padding: 24px 20px 80px; font-size: 17px; line-height: 1.7; }
+body { max-width: 1100px; margin: 0 auto; padding: 24px 20px 80px; font-size: 17px; line-height: 1.7; }
 
 /* Tablet */
 @media (max-width: 900px) and (min-width: 601px) {
@@ -196,6 +196,8 @@ CSS: `☐` через `::before` на `li`.
 
 ### 8. FAQ Accordion
 
+**Правило:** FAQ НЕ дублирует контент статьи. Каждый ответ добавляет новую информацию: нюанс, практический совет, edge-case, или уточнение, которое не вошло в основную секцию H2. Если ответ повторяет body-контент — переформулируй вопрос или замени его.
+
 ```html
 <details class="faq-item">
   <summary>Вопрос?</summary>
@@ -251,11 +253,13 @@ Mobile: grid-template-columns: 1fr (стек в колонку).
 
 ### 11. Блок «Правовая база» (для юридической ниши)
 
+**Важно:** все ссылки на законы должны вести на **конкретную статью**, а не на общий документ кодекса. Используй URL с хешем статьи (например, `consultant.ru/document/cons_doc_LAW_8982/<hash>/` для ст. 22 СК РФ), а не `consultant.ru/document/cons_doc_LAW_8982/` (весь кодекс). Пользователь должен сразу увидеть нужную норму.
+
 ```html
 <div class="law-base">
   <h2>Правовая база</h2>
   <ul>
-    <li><a href="url">Ст. XX СК РФ</a> — пояснение простыми словами</li>
+    <li><a href="https://www.consultant.ru/document/cons_doc_LAW_8982/<hash>/">Ст. XX СК РФ</a> — пояснение простыми словами</li>
   </ul>
 </div>
 ```
@@ -299,7 +303,7 @@ CSS: surface bg, border, radius 10px. Список без маркеров, ка
 <div class="doc-template">
   <div class="doc-header">
     <h3>Образец: <название документа></h3>
-    <span class="doc-badge">Шаблон</span>
+    <span class="doc-badge">Образец</span>
   </div>
   <pre class="doc-body"><code>В <span class="placeholder">[наименование суда/органа]</span>
 От: <span class="placeholder">[Ваше Ф.И.О.]</span>
@@ -493,7 +497,7 @@ document.querySelectorAll('.animate-in').forEach(el => observer.observe(el));
    <a href="url" target="_blank" rel="noopener">текст ссылки</a>
    ```
 
-3. **Никогда не фабрикуют хеш-фрагменты** в URL consultant.ru или других сайтов.
+3. **Не фабрикуют хеш-фрагменты вручную.** Хеши, полученные из WebSearch или браузера — допустимы. Если хеш недоступен — используй base-URL документа с пометкой `[URL требует уточнения]`.
 
 ---
 
@@ -527,16 +531,17 @@ document.querySelectorAll('.animate-in').forEach(el => observer.observe(el));
 | 8. Description | `<meta name="description">` |
 | 8. Первый экран | summary-card + choice-cards (если есть развилка) |
 | 9. H2 контент-план | `<section>` + `<h2>` |
-| 9. Формат блока | table / ol.steps / timeline / callout / checklist |
+| 9. Формат блока | table / ol.steps / timeline / callout / checklist / document-template / court-practice / risk-table |
 | 9. FAQ | `<details>` + FAQPage schema |
 | 10. Sticky nav | `.toc` |
 | 10. Сценарные развилки | `.choice-cards` |
+| 11. Правовая база | `.law-base` (для юридической ниши) |
 | 12. Резюме | `.callout-summary` с `<ol>` |
-| 12. Образец документа | `.doc-template` (если тема предполагает) |
-| 13. Судебная практика | `.court-practice` (для конфликтных тем) |
-| 14. Таблица рисков | `.risk-table` (для сложных споров) |
+| 13. Образец документа | `.doc-template` (если тема предполагает) |
+| 14. Судебная практика | `.court-practice` (для конфликтных тем) |
+| 15. Таблица рисков | `.risk-table` (для сложных споров) |
 | 15. Schema | JSON-LD в `<head>` |
-| 14. Дисклеймер | `.disclaimer` |
+| — | Дисклеймер | `.disclaimer` (для YMYL) |
 
 ---
 
@@ -550,8 +555,8 @@ document.querySelectorAll('.animate-in').forEach(el => observer.observe(el));
 - [ ] Каждый H2 = секция из контент-плана
 - [ ] Таблицы для сравнения, timeline для сроков
 - [ ] Callout-блоки для предупреждений и советов
-- [ ] FAQ accordion с полными ответами
-- [ ] Ссылки на источники: verified URL или base-URL
+- [ ] FAQ accordion — дополняет статью, НЕ дублирует body-контент
+- [ ] Ссылки на законы — ведут на конкретную статью (URL с хешем), а не на общий документ
 - [ ] YMYL-дисклеймер (если применимо)
 - [ ] Образец документа (если тема предполагает составление)
 - [ ] Судебная практика (для конфликтных юридических тем, 2-3 примера)

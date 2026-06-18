@@ -50,7 +50,7 @@ description: Universal SEO page brief pipeline. Takes any search query, runs rul
 ┌─────────────────────────────────────────────┐
 │ Stage 3: Fact-Check + Score                 │
 │ Проверка фактов через WebSearch + rubric    │
-│ Выход: верифицированный бриф (score ≥ 32)   │
+│ Выход: верифицированный бриф (score ≥ 38)   │
 └───────────────────┬─────────────────────────┘
                     │
                     ▼
@@ -94,7 +94,7 @@ npm.cmd run analyze:query -- --id <queryId> --query "<query>" --locale ru-RU
    - `сравнение`, `vs`, `или`, `что лучше` → `comparison_page`
    - `калькулятор`, `конвертер`, `рассчитать` → `hybrid_tool_guide`
    - `топ`, `рейтинг`, `лучшие` → `commercial_comparison_page`
-   - Медицинские/юридические/финансовые термины → добавить YMYL-флаг
+   - Медицинские/юридические/финансовые термины → определить уровень YMYL-риска (нет / средний / высокий)
 
 2. **Смешанные архетипы.** Если запрос неоднозначен (например, «как выбрать и что лучше»):
    - Определи **доминантный intent** — что пользователь хочет сделать в первую очередь
@@ -161,7 +161,7 @@ npm.cmd run analyze:query -- --id <queryId> --query "<query>" --locale ru-RU
 > После завершения Stage 3 выведи явный блок:
 > ```
 > ═══ STAGE 3 COMPLETE ═══
-> Score: XX/42
+> Score: XX/44
 > Fact-check: пройдена | частичная (N фактов unver)
 > Переход к Stage 4: разрешён / запрещён (причина)
 > ════════════════════════
@@ -187,7 +187,7 @@ npm.cmd run analyze:query -- --id <queryId> --query "<query>" --locale ru-RU
 
 ### 3.2. Scoring по рубрике
 
-Оцени бриф по шкале из 21 критерия (0-2 балла каждый, максимум 42):
+Оцени бриф по шкале из 22 критериев (0-2 балла каждый, максимум 44):
 
 | # | Критерий | Что проверяем | Критерий fail |
 |---|----------|---------------|---------------|
@@ -212,13 +212,23 @@ npm.cmd run analyze:query -- --id <queryId> --query "<query>" --locale ru-RU
 | 19 | Cannibalization | Проверена в паспорте | — |
 | 20 | Evidence mode | Указан и соответствует реальности | — |
 | 21 | Checklist ready | Секция 15 заполнена, все пункты ✓ | — |
+| 22 | FAQ non-duplication | FAQ дополняет body-контент, а не повторяет его | — |
+
+**Максимум: 44 балла.**
 
 **Пороги:**
-- 40–42: production-ready
-- 34–39: usable after revision (укажи, что доработать)
-- < 34: redo Stage 2 (вернись и дополни слабые секции)
+- 38–44: production-ready
+- 32–37: usable after revision (укажи, что доработать)
+- < 32: redo Stage 2 (вернись и дополни слабые секции)
 
-**Self-critique pass:** перед выставлением score — пройди по каждому критерию и найди слабое место. Если не можешь найти — спроси себя: «Что бы раскритиковал конкурент?»
+**Self-critique pass:** перед выставлением score — пройди по каждому критерию с шаблоном:
+```
+Для каждого критерия:
+1. Какой секции брифа это касается?
+2. Что конкретно может быть слабым местом?
+3. Оценка: 0 / 1 / 2? Почему не 2?
+Если все 2 — спроси: «Что бы раскритиковал конкурент?»
+```
 
 ### 3.3. Benchmark comparison (если доступен)
 
@@ -234,10 +244,10 @@ npm.cmd run analyze:query -- --id <queryId> --query "<query>" --locale ru-RU
 
 1. **Семантический HTML5**: `<article>`, `<nav>`, `<section>`, `<details>`, `<time>`
 2. **Schema.org JSON-LD** в `<head>`: `Article` + типовой schema (HowTo, FAQPage, etc.)
-3. **Responsive CSS**: max-width 780px, media query ≤600px
-5. **Структура**: breadcrumbs → sidebar TOC → meta → h1 → summary card → sections → FAQ → disclaimer
+3. **Responsive CSS**: max-width 1100px (CSS Grid: `1fr 220px`), media query ≤600px
+4. **Структура**: breadcrumbs → sidebar TOC → meta → h1 → summary card → sections → FAQ → disclaimer
 5. **Ссылки на источники**: `rel="noopener"`, `target="_blank"`
-6. **Без выдуманных URL**: если не уверен в точном URL — используй base-URL документа
+6. **Без выдуманных URL**: используй конкретные URL статей (с хешем) из WebSearch; если хеш недоступен — base-URL + пометка `[URL требует уточнения]`
 
 ### Обязательные блоки для YMYL
 
@@ -337,5 +347,3 @@ Pipeline:
 | Юридическая (право, законы, суды) | `editorial-rules-legal.md` |
 | Общая (how-to, обзоры, инструкции) | `editorial-rules-general.md` |
 | Медицинская, финансовая | Пока не созданы — используй `general` + добавь YMYL-правила из `legal` |
-
-Если в проекте есть `skills/seo-query-brief/` (Stage 1 pipeline), этот skill использует его вывод как вход Stage 2. Если нет — Stage 1 выполняется вручную.

@@ -129,7 +129,7 @@ Evidence mode: knowledge_draft | title_snippet_only | parsed_html
 |---|---|---|---|---|---|
 | | | | | | |
 
-Минимум: 8–12 триплетов. Каждый baseline-триплет = конкретная секция в контент-плане.
+Минимум: 8–12 триплетов.
 
 ---
 
@@ -191,7 +191,7 @@ Evidence mode: knowledge_draft | title_snippet_only | parsed_html
 Что написать: <конкретика для копирайтера>
 Обязательные факты: <из секции 5>
 Покрываемые запросы: core | supporting
-Формат блока: текст | таблица | список | callout | timeline
+Формат блока: текст | таблица | список | callout | timeline | чек-лист | document-template | court-practice | risk-table
 Не писать: <чего избегать>
 ```
 
@@ -216,6 +216,9 @@ Evidence mode: knowledge_draft | title_snippet_only | parsed_html
 - timeline (для сроков/этапов)
 - чек-лист (для подготовки)
 - FAQ accordion (для частых вопросов)
+- образец документа (для тем с составлением документов)
+- судебная практика (для конфликтных юридических тем)
+- таблица рисков (для сложных споров)
 
 ### Сценарные развилки:
 Если запрос допускает несколько путей — опиши развилку и точки ветвления.
@@ -320,7 +323,7 @@ Evidence mode: knowledge_draft | title_snippet_only | parsed_html
 
 ```
 Статус: ready_for_copywriter | ready_for_design_and_build | requires_expert_review | blocked
-Score: XX/40
+Score: XX/44
 Дата: YYYY-MM-DD
 Проверка фактов: пройдена | частичная | не пройдена
 ```
